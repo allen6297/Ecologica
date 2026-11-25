@@ -1,0 +1,18 @@
+Ecologica does not have a license yet.
+
+Copyright (c) 2026 Kalob Allen. All rights reserved.
+
+The owner of this repository has not chosen a license. Until they do, no
+permission is granted to use, copy, modify, or distribute this project beyond
+what the host already allows for viewing the repository.
+
+Pick a license (https://choosealicense.com/) and replace this file. Then set
+`mod_license` in gradle.properties to the same short name so it is what
+neoforge.mods.toml reports.
+
+This file is a placeholder note. It is not itself a license, and it does not
+select MIT, GPL, CC BY-NC-SA, or any other terms.
+
+The NeoForge MDK this project was generated from is covered by the template
+license supplied with that MDK (MIT, copyright NeoForged). That license applies
+to the unmodified template, not to Ecologica as a whole.

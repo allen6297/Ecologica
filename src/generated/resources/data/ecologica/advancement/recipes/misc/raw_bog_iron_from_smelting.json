@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_bog_iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ecologica:raw_bog_iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ecologica:raw_bog_iron_from_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_bog_iron"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ecologica:raw_bog_iron_from_smelting"
+    ]
+  }
+}
