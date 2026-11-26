@@ -1,31 +1,29 @@
 package com.allen6297.ecologica.gametest;
 
-import com.allen6297.ecologica.Ecologica;
 import com.allen6297.ecologica.block.DriedFenSoilBlock;
 import com.allen6297.ecologica.block.FenMossBlock;
 import com.allen6297.ecologica.block.PeatBlock;
 import com.allen6297.ecologica.registry.EcologicaBlocks;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.gametest.GameTestHolder;
-import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
-import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
-import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
+
+import com.allen6297.ecologica.worldgen.EcologicaFuels;
 
 /**
  * Peat is the step between mineral mud and bog iron, and it is the part of the fen that can dry out.
  */
-@GameTestHolder(Ecologica.MOD_ID)
-@PrefixGameTestTemplate(false)
 public class FenSoilTests {
     private static final BlockPos PATCH = new BlockPos(3, 2, 3);
 
-    @GameTest(template = "platform")
-    public void livingPatchTurnsMudIntoPeat(GameTestHelper helper) {
+    public static void livingPatchTurnsMudIntoPeat(GameTestHelper helper) {
         layOn(helper, Blocks.MUD);
         boolean formed = FenMossBlock.tryAccumulate(helper.getLevel(), helper.absolutePos(PATCH), RandomSource.create(7));
         if (!formed) {
@@ -39,8 +37,7 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void mudDoesNotBecomeBogIronDirectly(GameTestHelper helper) {
+    public static void mudDoesNotBecomeBogIronDirectly(GameTestHelper helper) {
         layOn(helper, Blocks.MUD);
         boolean formed = FenMossBlock.trySeep(helper.getLevel(), helper.absolutePos(PATCH), RandomSource.create(8));
         if (formed) {
@@ -50,8 +47,7 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void smallPatchDoesNotAccumulate(GameTestHelper helper) {
+    public static void smallPatchDoesNotAccumulate(GameTestHelper helper) {
         helper.setBlock(PATCH.below(), Blocks.MUD);
         helper.setBlock(PATCH, EcologicaBlocks.FEN_MOSS.get());
         boolean formed = FenMossBlock.tryAccumulate(helper.getLevel(), helper.absolutePos(PATCH), RandomSource.create(9));
@@ -62,8 +58,7 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void exposedPeatDries(GameTestHelper helper) {
+    public static void exposedPeatDries(GameTestHelper helper) {
         BlockPos peat = new BlockPos(3, 1, 3);
         helper.setBlock(peat, EcologicaBlocks.PEAT.get());
         if (!PeatBlock.tryDry(helper.getLevel(), helper.absolutePos(peat))) {
@@ -73,8 +68,7 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void mossKeepsPeatFromDrying(GameTestHelper helper) {
+    public static void mossKeepsPeatFromDrying(GameTestHelper helper) {
         BlockPos peat = PATCH.below();
         helper.setBlock(peat, EcologicaBlocks.PEAT.get());
         helper.setBlock(PATCH, EcologicaBlocks.FEN_MOSS.get());
@@ -86,8 +80,7 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void waterKeepsPeatFromDrying(GameTestHelper helper) {
+    public static void waterKeepsPeatFromDrying(GameTestHelper helper) {
         BlockPos peat = new BlockPos(3, 1, 3);
         helper.setBlock(peat, EcologicaBlocks.PEAT.get());
         helper.setBlock(peat.east(), Blocks.WATER);
@@ -98,8 +91,7 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void waterTurnsDriedSoilBackIntoMud(GameTestHelper helper) {
+    public static void waterTurnsDriedSoilBackIntoMud(GameTestHelper helper) {
         BlockPos soil = new BlockPos(3, 1, 3);
         helper.setBlock(soil, EcologicaBlocks.DRIED_FEN_SOIL.get());
         if (DriedFenSoilBlock.tryRewet(helper.getLevel(), helper.absolutePos(soil))) {
@@ -113,8 +105,7 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void mossPopsOffDriedSoil(GameTestHelper helper) {
+    public static void mossPopsOffDriedSoil(GameTestHelper helper) {
         BlockPos soil = PATCH.below();
         helper.setBlock(soil, EcologicaBlocks.PEAT.get());
         helper.setBlock(PATCH, EcologicaBlocks.FEN_MOSS.get());
@@ -123,15 +114,20 @@ public class FenSoilTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void peatBurnsLongerThanAPlankAndShorterThanCoal(GameTestHelper helper) {
-        FurnaceFuel fuel = EcologicaBlocks.PEAT.get().asItem().builtInRegistryHolder().getData(NeoForgeDataMaps.FURNACE_FUELS);
-        if (fuel == null) {
-            helper.fail("peat should be registered as a furnace fuel");
+    public static void peatBurnsLongerThanAPlankAndShorterThanCoal(GameTestHelper helper) {
+        ItemStack peat = new ItemStack(EcologicaBlocks.PEAT.get());
+        if (!peat.has(DataComponents.COOKING_FUEL)) {
+            helper.fail("peat should carry a cooking fuel component");
             return;
         }
-        if (fuel.burnTime() != PeatBlock.BURN_TIME) {
-            helper.fail("peat burn time should be " + PeatBlock.BURN_TIME + ", was " + fuel.burnTime());
+        // Burn times live in the server's reloadable registries, not the level's registry access.
+        ContextIntProvider provider = helper.getLevel().getServer().reloadableRegistries().lookup()
+                .lookupOrThrow(Registries.CONTEXT_INT_PROVIDER)
+                .getOrThrow(EcologicaFuels.PEAT_BURN_TIME)
+                .value();
+        if (!(provider instanceof ConstantValue constant) || constant.value() != PeatBlock.BURN_TIME) {
+            helper.fail("peat burn time should be " + PeatBlock.BURN_TIME);
+            return;
         }
         helper.succeed();
     }

@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.allen6297.ecologica.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BuiltinTestFunctionsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

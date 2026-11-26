@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:ore",
+  "discard_chance_on_air_exposure": 0.0,
+  "size": 5,
+  "targets": [
+    {
+      "state": "ecologica:peat",
+      "target": {
+        "block": "minecraft:mud",
+        "predicate_type": "minecraft:block_match"
+      }
+    },
+    {
+      "state": "ecologica:peat",
+      "target": {
+        "block": "minecraft:dirt",
+        "predicate_type": "minecraft:block_match"
+      }
+    },
+    {
+      "state": "ecologica:peat",
+      "target": {
+        "block": "minecraft:clay",
+        "predicate_type": "minecraft:block_match"
+      }
+    }
+  ]
+}

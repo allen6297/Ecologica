@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ecologica:raw_bog_iron_from_smelting"
+        "recipes": "ecologica:raw_bog_iron_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

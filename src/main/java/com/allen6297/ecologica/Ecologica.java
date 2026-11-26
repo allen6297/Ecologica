@@ -3,6 +3,7 @@ package com.allen6297.ecologica;
 import org.slf4j.Logger;
 
 import com.allen6297.ecologica.datagen.EcologicaDataGenerators;
+import com.allen6297.ecologica.gametest.EcologicaGameTests;
 import com.allen6297.ecologica.registry.EcologicaBlocks;
 import com.allen6297.ecologica.registry.EcologicaCreativeTabs;
 import com.allen6297.ecologica.registry.EcologicaItems;
@@ -12,6 +13,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.RegisterGameTestsEvent;
 
 @Mod(Ecologica.MOD_ID)
 public class Ecologica {
@@ -20,7 +23,8 @@ public class Ecologica {
 
     public Ecologica(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(EcologicaDataGenerators::gatherData);
+        modEventBus.addListener(GatherDataEvent.Client.class, EcologicaDataGenerators::gatherData);
+        modEventBus.addListener(EcologicaGameTests::register);
 
         EcologicaBlocks.BLOCKS.register(modEventBus);
         EcologicaItems.ITEMS.register(modEventBus);
