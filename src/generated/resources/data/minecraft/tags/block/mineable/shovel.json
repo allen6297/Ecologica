@@ -1,5 +1,7 @@
 {
   "values": [
-    "ecologica:bog_iron_ore"
+    "ecologica:bog_iron_ore",
+    "ecologica:peat",
+    "ecologica:dried_fen_soil"
   ]
 }

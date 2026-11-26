@@ -32,6 +32,7 @@ public final class EcologicaDataGenerators {
         generator.addProvider(event.includeServer(), new EcologicaBiomeTagsProvider(output, lookup, existing));
         generator.addProvider(event.includeServer(), new EcologicaLootTableProvider(output, lookup));
         generator.addProvider(event.includeServer(), new EcologicaRecipeProvider(output, lookup));
+        generator.addProvider(event.includeServer(), new EcologicaDataMapProvider(output, lookup));
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(
                 output,
                 lookup,

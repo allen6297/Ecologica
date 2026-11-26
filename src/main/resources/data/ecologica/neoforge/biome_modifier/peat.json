@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#ecologica:has_bog_iron",
+  "features": "ecologica:peat",
+  "step": "underground_ores"
+}

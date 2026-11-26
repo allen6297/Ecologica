@@ -18,5 +18,7 @@ public class EcologicaBlockStateProvider extends BlockStateProvider {
         var fenMoss = models().withExistingParent("fen_moss", "minecraft:block/carpet")
                 .texture("wool", modLoc("block/fen_moss"));
         simpleBlockWithItem(EcologicaBlocks.FEN_MOSS.get(), fenMoss);
+        simpleBlockWithItem(EcologicaBlocks.PEAT.get(), cubeAll(EcologicaBlocks.PEAT.get()));
+        simpleBlockWithItem(EcologicaBlocks.DRIED_FEN_SOIL.get(), cubeAll(EcologicaBlocks.DRIED_FEN_SOIL.get()));
     }
 }

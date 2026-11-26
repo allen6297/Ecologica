@@ -1,7 +1,9 @@
 package com.allen6297.ecologica.registry;
 
 import com.allen6297.ecologica.Ecologica;
+import com.allen6297.ecologica.block.DriedFenSoilBlock;
 import com.allen6297.ecologica.block.FenMossBlock;
+import com.allen6297.ecologica.block.PeatBlock;
 
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.DropExperienceBlock;
@@ -39,6 +41,22 @@ public final class EcologicaBlocks {
                     .sound(SoundType.MOSS_CARPET)
                     .pushReaction(PushReaction.DESTROY)
                     .noOcclusion()
+                    .randomTicks()));
+
+    /** Organic layer of a living fen. Shovel it for a poor fuel. Leave it uncovered and it dries. */
+    public static final DeferredBlock<PeatBlock> PEAT = BLOCKS.register("peat",
+            () -> new PeatBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.TERRACOTTA_BROWN)
+                    .strength(0.6F)
+                    .sound(SoundType.MUD)
+                    .randomTicks()));
+
+    /** Peat that lost its moss and its water. Water against it turns it back into mud. */
+    public static final DeferredBlock<DriedFenSoilBlock> DRIED_FEN_SOIL = BLOCKS.register("dried_fen_soil",
+            () -> new DriedFenSoilBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)
+                    .strength(0.5F)
+                    .sound(SoundType.GRAVEL)
                     .randomTicks()));
 
     private EcologicaBlocks() {}

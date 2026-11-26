@@ -12,6 +12,8 @@ public final class EcologicaItems {
 
     public static final DeferredItem<BlockItem> BOG_IRON_ORE = ITEMS.registerSimpleBlockItem(EcologicaBlocks.BOG_IRON_ORE);
     public static final DeferredItem<BlockItem> FEN_MOSS = ITEMS.registerSimpleBlockItem(EcologicaBlocks.FEN_MOSS);
+    public static final DeferredItem<BlockItem> PEAT = ITEMS.registerSimpleBlockItem(EcologicaBlocks.PEAT);
+    public static final DeferredItem<BlockItem> DRIED_FEN_SOIL = ITEMS.registerSimpleBlockItem(EcologicaBlocks.DRIED_FEN_SOIL);
     public static final DeferredItem<Item> RAW_BOG_IRON = ITEMS.registerSimpleItem("raw_bog_iron");
 
     private EcologicaItems() {}

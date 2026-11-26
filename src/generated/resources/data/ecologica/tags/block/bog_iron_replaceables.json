@@ -4,6 +4,7 @@
     "minecraft:coarse_dirt",
     "minecraft:rooted_dirt",
     "minecraft:mud",
-    "minecraft:clay"
+    "minecraft:clay",
+    "ecologica:peat"
   ]
 }

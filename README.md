@@ -7,7 +7,8 @@ The design, including the three principles borrowed from Klei Wright's essay ["H
 What is in the game:
 
 - **Bog iron**, a soft iron concretion in wetland mud. It generates in swamps and mangrove swamps, is mined with a shovel, and the raw item smelts to an iron ingot.
-- **Fen moss**, a living skin on that mud. A patch of four or more slowly turns the sediment under it into more bog iron, until three concretions are already nearby. Strip the patch and the seep stops. Dig the concretions, leave the moss, and it can start again.
+- **Fen moss**, a living skin on that mud. A patch of four or more turns the mud under it into peat, and turns peat into bog iron, until three concretions are nearby. Strip the patch and the seep stops.
+- **Peat**, the fen's organic layer. Shovel it up and it burns in a furnace for 800 ticks, four items. Leave a placed peat block with no moss and no water against it and it becomes dried fen soil. Water against that crust turns it back into mud.
 
 The tundra, lichen, and muskox described in the design doc are not implemented yet.
 
@@ -24,7 +25,7 @@ The Gradle wrapper is included. The first run downloads Minecraft, NeoForge, and
 ./gradlew build
 ```
 
-Produces `build/libs/ecologica-0.2.0.jar`.
+Produces `build/libs/ecologica-0.3.0.jar`.
 
 ```bash
 ./gradlew runData
@@ -36,9 +37,11 @@ Regenerates models, language, loot, recipes, tags, and worldgen JSON into `src/g
 ./gradlew runClient
 ```
 
-Launches a Minecraft client with the mod loaded. Bog iron and fen moss are on the **Ecologica** creative tab.
+Launches a Minecraft client with the mod loaded. Bog iron, fen moss, peat, and dried fen soil are on the **Ecologica** creative tab.
 
-In a survival world, look in a swamp or mangrove swamp. Bog iron is between Y=48 and Y=68 in dirt, mud, or clay, and it is dug with a shovel. A pickaxe does not collect it. Fen moss generates as a carpet on mud and dirt banks in those biomes. To watch the seep without waiting, place four or more fen moss on mud and run `/gamerule randomTickSpeed 300`. Concretions appear in the mud under the patch, then pause once three are nearby. Break the moss down to fewer than four and no new ore forms. Break the ore, leave the moss, and the seep can fill the gap.
+In a survival world, look in a swamp or mangrove swamp. Bog iron is between Y=48 and Y=68 in dirt, mud, clay, or peat, and it is dug with a shovel. A pickaxe does not collect it. Peat generates a little higher, about Y=60 to Y=72, in mud, dirt, and clay. Fen moss generates as a carpet on those sediments.
+
+To watch the loop without waiting, run `/gamerule randomTickSpeed 300` and place four or more fen moss on mud. The mud becomes peat, then the peat becomes bog iron, and new iron pauses once three concretions are nearby. Break the moss and leave the peat in the air: it dries into dried fen soil. Put water against that crust and it becomes mud again. Peat in a furnace smelts four items.
 
 ```bash
 ./gradlew runServer

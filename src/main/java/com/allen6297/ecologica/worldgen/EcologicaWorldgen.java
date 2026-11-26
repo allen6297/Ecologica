@@ -27,6 +27,8 @@ import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
@@ -45,6 +47,11 @@ public final class EcologicaWorldgen {
     public static final int FEN_MOSS_Y_SPREAD = 2;
     public static final int FEN_MOSS_PATCHES_PER_CHUNK = 2;
 
+    public static final int PEAT_VEIN_SIZE = 5;
+    public static final int PEAT_VEINS_PER_CHUNK = 4;
+    public static final int PEAT_MIN_Y = 60;
+    public static final int PEAT_MAX_Y = 72;
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> BOG_IRON_ORE_CONFIGURED = ResourceKey.create(
             Registries.CONFIGURED_FEATURE,
             ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "bog_iron_ore"));
@@ -62,6 +69,15 @@ public final class EcologicaWorldgen {
     public static final ResourceKey<PlacedFeature> FEN_MOSS_PLACED = ResourceKey.create(
             Registries.PLACED_FEATURE,
             ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "fen_moss"));
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PEAT_CONFIGURED = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE,
+            ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "peat"));
+
+    /** Must match {@code features} in {@code data/ecologica/neoforge/biome_modifier/peat.json}. */
+    public static final ResourceKey<PlacedFeature> PEAT_PLACED = ResourceKey.create(
+            Registries.PLACED_FEATURE,
+            ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "peat"));
 
     public static void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest wetlandSediment = new TagMatchTest(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES);
@@ -88,6 +104,18 @@ public final class EcologicaWorldgen {
                                         Feature.SIMPLE_BLOCK,
                                         new SimpleBlockConfiguration(BlockStateProvider.simple(EcologicaBlocks.FEN_MOSS.get())),
                                         BlockPredicate.ONLY_IN_AIR_PREDICATE))));
+
+        // Peat replaces mineral wetland sediment only, so a vein does not rewrite peat that is already there.
+        context.register(
+                PEAT_CONFIGURED,
+                new ConfiguredFeature<>(
+                        Feature.ORE,
+                        new OreConfiguration(
+                                List.of(
+                                        OreConfiguration.target(new BlockMatchTest(Blocks.MUD), EcologicaBlocks.PEAT.get().defaultBlockState()),
+                                        OreConfiguration.target(new BlockMatchTest(Blocks.DIRT), EcologicaBlocks.PEAT.get().defaultBlockState()),
+                                        OreConfiguration.target(new BlockMatchTest(Blocks.CLAY), EcologicaBlocks.PEAT.get().defaultBlockState())),
+                                PEAT_VEIN_SIZE)));
     }
 
     public static void bootstrapPlaced(BootstrapContext<PlacedFeature> context) {
@@ -111,6 +139,17 @@ public final class EcologicaWorldgen {
                                 CountPlacement.of(FEN_MOSS_PATCHES_PER_CHUNK),
                                 InSquarePlacement.spread(),
                                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                                BiomeFilter.biome())));
+        context.register(
+                PEAT_PLACED,
+                new PlacedFeature(
+                        configured.getOrThrow(PEAT_CONFIGURED),
+                        List.of(
+                                CountPlacement.of(PEAT_VEINS_PER_CHUNK),
+                                InSquarePlacement.spread(),
+                                HeightRangePlacement.uniform(
+                                        VerticalAnchor.absolute(PEAT_MIN_Y),
+                                        VerticalAnchor.absolute(PEAT_MAX_Y)),
                                 BiomeFilter.biome())));
     }
 
