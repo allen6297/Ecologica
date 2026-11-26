@@ -19,6 +19,7 @@ public final class EcologicaCreativeTabs {
             .displayItems((parameters, output) -> {
                 output.accept(EcologicaItems.BOG_IRON_ORE.get());
                 output.accept(EcologicaItems.RAW_BOG_IRON.get());
+                output.accept(EcologicaItems.FEN_MOSS.get());
             })
             .build());
 

@@ -9,14 +9,21 @@ import com.allen6297.ecologica.tag.EcologicaTags;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
+import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -33,6 +40,11 @@ public final class EcologicaWorldgen {
     public static final int BOG_IRON_MIN_Y = 48;
     public static final int BOG_IRON_MAX_Y = 68;
 
+    public static final int FEN_MOSS_TRIES = 16;
+    public static final int FEN_MOSS_XZ_SPREAD = 4;
+    public static final int FEN_MOSS_Y_SPREAD = 2;
+    public static final int FEN_MOSS_PATCHES_PER_CHUNK = 2;
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> BOG_IRON_ORE_CONFIGURED = ResourceKey.create(
             Registries.CONFIGURED_FEATURE,
             ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "bog_iron_ore"));
@@ -41,6 +53,15 @@ public final class EcologicaWorldgen {
     public static final ResourceKey<PlacedFeature> BOG_IRON_ORE_PLACED = ResourceKey.create(
             Registries.PLACED_FEATURE,
             ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "bog_iron_ore"));
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FEN_MOSS_CONFIGURED = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE,
+            ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "fen_moss"));
+
+    /** Must match {@code features} in {@code data/ecologica/neoforge/biome_modifier/fen_moss.json}. */
+    public static final ResourceKey<PlacedFeature> FEN_MOSS_PLACED = ResourceKey.create(
+            Registries.PLACED_FEATURE,
+            ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "fen_moss"));
 
     public static void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest wetlandSediment = new TagMatchTest(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES);
@@ -53,6 +74,20 @@ public final class EcologicaWorldgen {
                                         wetlandSediment,
                                         EcologicaBlocks.BOG_IRON_ORE.get().defaultBlockState())),
                                 BOG_IRON_VEIN_SIZE)));
+
+        // Moss only survives on wetland sediment, so the patch lands on mud and dirt banks and skips grass and water.
+        context.register(
+                FEN_MOSS_CONFIGURED,
+                new ConfiguredFeature<>(
+                        Feature.RANDOM_PATCH,
+                        new RandomPatchConfiguration(
+                                FEN_MOSS_TRIES,
+                                FEN_MOSS_XZ_SPREAD,
+                                FEN_MOSS_Y_SPREAD,
+                                PlacementUtils.filtered(
+                                        Feature.SIMPLE_BLOCK,
+                                        new SimpleBlockConfiguration(BlockStateProvider.simple(EcologicaBlocks.FEN_MOSS.get())),
+                                        BlockPredicate.ONLY_IN_AIR_PREDICATE))));
     }
 
     public static void bootstrapPlaced(BootstrapContext<PlacedFeature> context) {
@@ -67,6 +102,15 @@ public final class EcologicaWorldgen {
                                 HeightRangePlacement.uniform(
                                         VerticalAnchor.absolute(BOG_IRON_MIN_Y),
                                         VerticalAnchor.absolute(BOG_IRON_MAX_Y)),
+                                BiomeFilter.biome())));
+        context.register(
+                FEN_MOSS_PLACED,
+                new PlacedFeature(
+                        configured.getOrThrow(FEN_MOSS_CONFIGURED),
+                        List.of(
+                                CountPlacement.of(FEN_MOSS_PATCHES_PER_CHUNK),
+                                InSquarePlacement.spread(),
+                                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                                 BiomeFilter.biome())));
     }
 

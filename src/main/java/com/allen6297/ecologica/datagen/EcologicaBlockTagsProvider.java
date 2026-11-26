@@ -30,5 +30,8 @@ public class EcologicaBlockTagsProvider extends BlockTagsProvider {
                 Blocks.ROOTED_DIRT,
                 Blocks.MUD,
                 Blocks.CLAY);
+        tag(EcologicaTags.Blocks.FEN_MOSS_SUPPORTS)
+                .addTag(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES)
+                .add(EcologicaBlocks.BOG_IRON_ORE.get());
     }
 }

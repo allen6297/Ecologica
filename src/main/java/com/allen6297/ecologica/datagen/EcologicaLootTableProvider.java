@@ -29,6 +29,7 @@ public class EcologicaLootTableProvider extends LootTableProvider {
         protected void generate() {
             add(EcologicaBlocks.BOG_IRON_ORE.get(),
                     createOreDrop(EcologicaBlocks.BOG_IRON_ORE.get(), EcologicaItems.RAW_BOG_IRON.get()));
+            dropSelf(EcologicaBlocks.FEN_MOSS.get());
         }
 
         @Override

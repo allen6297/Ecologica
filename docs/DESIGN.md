@@ -153,16 +153,16 @@ The wetland is the same shape of loop, started from the other end (the metal fir
 waterlogged organic sediment
         │
         ▼
-bog iron concretions          (implemented: worldgen only)
+bog iron concretions          (worldgen, and the seep below)
         │
         ▼
-a later pioneer (peat or fen moss) keeps the seep wet
+fen moss holds on that sediment
         │
-        ├── leave it ──► slow new concretions
-        └── strip it ──► the seep stops
+        ├── a patch of 4 or more ──► slow new concretions, until 3 are already nearby
+        └── strip it below a patch ──► the seep stops
 ```
 
-Renewal is the reward for leaving a working fen. A stripped fen is simply not a fen anymore. No scolding.
+Renewal is the reward for leaving a working fen. A stripped fen is simply not a fen anymore. No scolding. This loop is in the game as of milestone 2. Peat as a fuel, and a fen that dries into a different sediment when the moss is gone, are still later. The moss is the living part; the mud stays mud.
 
 Banded iron and bog iron are two homes for the same metal. They should not be collapsed into one "iron ore" with two textures. A player who has learned mesas-mean-gold can learn tundra-means-banded-iron and wetlands-mean-bog-iron.
 
@@ -189,7 +189,19 @@ Code map:
 | Vein size, height, feature keys | `src/main/java/com/allen6297/ecologica/worldgen/EcologicaWorldgen.java` |
 | Models, language, loot, recipes, tags, features | `src/main/java/com/allen6297/ecologica/datagen/` |
 | Generated JSON | `src/generated/resources/` |
-| Biome modifier | `src/main/resources/data/ecologica/neoforge/biome_modifier/bog_iron_ore.json` |
+| Fen moss block and the seep | `src/main/java/com/allen6297/ecologica/block/FenMossBlock.java` |
+| Biome modifiers | `src/main/resources/data/ecologica/neoforge/biome_modifier/` |
+
+## Milestone 2, implemented
+
+Fen moss is the first thing in the mod that changes the world after the chunk exists.
+
+- Block `ecologica:fen_moss`. A carpet. It survives only on `ecologica:fen_moss_supports`: the bog-iron sediments, plus bog iron ore so the seep does not uproot itself. Anywhere else it pops, and the item drops, so a dug-up transplant can be replanted.
+- It generates on the surface in `ecologica:has_bog_iron`, two patches a chunk, and only where the block below is sediment. Grass and open water do not take it.
+- On a random tick inside that tag, it sometimes spreads one block onto neighboring sediment. Outside the tag, a placed moss stays where you put it and does not colonize.
+- The seep: four or more moss blocks in a 5×3×5 neighborhood, and fewer than three bog-iron blocks already there, and one sediment block under the moss becomes bog iron. The odds are one try per ten random ticks, per moss block. A smaller patch does nothing. A full neighborhood waits until a concretion is dug. Removing the moss is the off switch. There is no debuff and no message.
+
+Game tests in `FenMossTests` drive the seep directly. They do not wait on random ticks.
 
 ## Compatibility
 
@@ -210,7 +222,7 @@ Each milestone should be playable on its own. A milestone is done when a player 
 
 **Milestone 1 — Bog iron. Done in this repository.** One sympathetic ore, tag-invited worldgen, a shortcut smelt. Proves the project, the data generator, and the "no tag, no change" rule. Does not yet feed back.
 
-**Milestone 2 — A fen that can heal.** One wetland pioneer (peat, or a moss that only holds on waterlogged sediment). While it remains, bog iron can form again slowly in loaded chunks. Strip the pioneer and the new concretions stop. Players who leave a working patch keep a seep; players who take everything get what they dug and no more. This is the first feedback loop and the first stewardship reward. No debuff.
+**Milestone 2 — A fen that can heal. Done.** Fen moss sits only on wetland sediment (and on bog iron, so a new concretion does not tear it up). It spreads onto nearby sediment inside `ecologica:has_bog_iron` and nowhere else. A patch of 4 or more, on a random tick, precipitates one bog-iron block into the sediment under the moss, until that neighborhood already holds 3 concretions. Dig those and the seep can work again. Drop the patch below 4 moss blocks and it stops. Dig the sediment out from under a moss and the moss item pops, so it can be replanted. No debuff. Still later, and not part of this loop: peat as a fuel, and the mud itself turning into a drier sediment when the moss is gone.
 
 **Milestone 3 — Tundra ground, iron's other home.** Deepslate to the surface in a tagged cold biome. Smooth basalt patches as greenstone belts. `ecologica:smooth_basalt_iron_ore` (banded iron) drops more iron than vanilla ore, with raw iron blocks in the belt and a short vein under each belt that reaches the surface. This is the essay's ore. It lands here, after bog iron, because the belt wants the tundra's rock column and should arrive with that column, not as a second lonely ore in vanilla stone.
 
