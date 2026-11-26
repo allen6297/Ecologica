@@ -15,5 +15,8 @@ public class EcologicaBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlockWithItem(EcologicaBlocks.BOG_IRON_ORE.get(), cubeAll(EcologicaBlocks.BOG_IRON_ORE.get()));
+        var fenMoss = models().withExistingParent("fen_moss", "minecraft:block/carpet")
+                .texture("wool", modLoc("block/fen_moss"));
+        simpleBlockWithItem(EcologicaBlocks.FEN_MOSS.get(), fenMoss);
     }
 }

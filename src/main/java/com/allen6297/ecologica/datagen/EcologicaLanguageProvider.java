@@ -15,6 +15,7 @@ public class EcologicaLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add(EcologicaBlocks.BOG_IRON_ORE.get(), "Bog Iron Ore");
+        add(EcologicaBlocks.FEN_MOSS.get(), "Fen Moss");
         add(EcologicaItems.RAW_BOG_IRON.get(), "Raw Bog Iron");
         add("itemGroup.ecologica", "Ecologica");
     }

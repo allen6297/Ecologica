@@ -1,12 +1,14 @@
 package com.allen6297.ecologica.registry;
 
 import com.allen6297.ecologica.Ecologica;
+import com.allen6297.ecologica.block.FenMossBlock;
 
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -25,6 +27,19 @@ public final class EcologicaBlocks {
                             .strength(1.25F)
                             .sound(SoundType.PACKED_MUD)
                             .requiresCorrectToolForDrops()));
+
+    /**
+     * A living skin on wetland sediment. Four or more in a small patch slowly turn the
+     * mud under them into bog iron. Fewer than that, or a patch that is already full, does not.
+     */
+    public static final DeferredBlock<FenMossBlock> FEN_MOSS = BLOCKS.register("fen_moss",
+            () -> new FenMossBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GREEN)
+                    .strength(0.1F)
+                    .sound(SoundType.MOSS_CARPET)
+                    .pushReaction(PushReaction.DESTROY)
+                    .noOcclusion()
+                    .randomTicks()));
 
     private EcologicaBlocks() {}
 }

@@ -4,7 +4,12 @@ Ecologica is a NeoForge mod for Minecraft 1.21.1 (mod id `ecologica`). Geology a
 
 The design, including the three principles borrowed from Klei Wright's essay ["How can we make Minecraft feel alive? (It isn't structures)"](https://youtu.be/cBmt2FNP1Ug), is in [`docs/DESIGN.md`](docs/DESIGN.md).
 
-This repository currently contains the first milestone only: **bog iron**, a soft iron concretion in wetland mud. It generates in swamps and mangrove swamps, is mined with a shovel, and the raw item smelts to an iron ingot. The tundra, lichen, and muskox described in the design doc are not implemented yet.
+What is in the game:
+
+- **Bog iron**, a soft iron concretion in wetland mud. It generates in swamps and mangrove swamps, is mined with a shovel, and the raw item smelts to an iron ingot.
+- **Fen moss**, a living skin on that mud. A patch of four or more slowly turns the sediment under it into more bog iron, until three concretions are already nearby. Strip the patch and the seep stops. Dig the concretions, leave the moss, and it can start again.
+
+The tundra, lichen, and muskox described in the design doc are not implemented yet.
 
 ## Requirements
 
@@ -19,7 +24,7 @@ The Gradle wrapper is included. The first run downloads Minecraft, NeoForge, and
 ./gradlew build
 ```
 
-Produces `build/libs/ecologica-0.1.0.jar`.
+Produces `build/libs/ecologica-0.2.0.jar`.
 
 ```bash
 ./gradlew runData
@@ -31,13 +36,21 @@ Regenerates models, language, loot, recipes, tags, and worldgen JSON into `src/g
 ./gradlew runClient
 ```
 
-Launches a Minecraft client with the mod loaded. Bog iron is on the **Ecologica** creative tab. In a survival world, look in a swamp or mangrove swamp between Y=48 and Y=68 and dig dirt, mud, or clay with a shovel. A pickaxe will not collect the block.
+Launches a Minecraft client with the mod loaded. Bog iron and fen moss are on the **Ecologica** creative tab.
+
+In a survival world, look in a swamp or mangrove swamp. Bog iron is between Y=48 and Y=68 in dirt, mud, or clay, and it is dug with a shovel. A pickaxe does not collect it. Fen moss generates as a carpet on mud and dirt banks in those biomes. To watch the seep without waiting, place four or more fen moss on mud and run `/gamerule randomTickSpeed 300`. Concretions appear in the mud under the patch, then pause once three are nearby. Break the moss down to fewer than four and no new ore forms. Break the ore, leave the moss, and the seep can fill the gap.
 
 ```bash
 ./gradlew runServer
 ```
 
-Launches a dedicated server. `runGameTestServer` is the MDK's game-test harness. This project does not register game tests yet, so that task exits as a failure until tests exist.
+Launches a dedicated server.
+
+```bash
+./gradlew runGameTestServer
+```
+
+Runs the fen-moss game tests (the seep, the patch size, the full-neighborhood pause, stripping, and the biome gate on spread).
 
 Import the repository as a Gradle project in IntelliJ IDEA or Eclipse. If libraries look missing, run `./gradlew --refresh-dependencies`.
 

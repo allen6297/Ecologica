@@ -15,6 +15,14 @@ public final class EcologicaTags {
                 Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "bog_iron_replaceables"));
 
+        /**
+         * Blocks fen moss can sit on. Includes the sediments bog iron replaces, plus bog iron
+         * itself, so a concretion forming under the moss does not tear the moss up.
+         */
+        public static final TagKey<Block> FEN_MOSS_SUPPORTS = TagKey.create(
+                Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Ecologica.MOD_ID, "fen_moss_supports"));
+
         private Blocks() {}
     }
 
