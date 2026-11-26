@@ -1,6 +1,7 @@
 package com.allen6297.ecologica.registry;
 
 import com.allen6297.ecologica.Ecologica;
+import com.allen6297.ecologica.worldgen.EcologicaFuels;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -12,7 +13,8 @@ public final class EcologicaItems {
 
     public static final DeferredItem<BlockItem> BOG_IRON_ORE = ITEMS.registerSimpleBlockItem(EcologicaBlocks.BOG_IRON_ORE);
     public static final DeferredItem<BlockItem> FEN_MOSS = ITEMS.registerSimpleBlockItem(EcologicaBlocks.FEN_MOSS);
-    public static final DeferredItem<BlockItem> PEAT = ITEMS.registerSimpleBlockItem(EcologicaBlocks.PEAT);
+    public static final DeferredItem<BlockItem> PEAT = ITEMS.registerSimpleBlockItem(
+            EcologicaBlocks.PEAT, properties -> properties.cookingFuel(EcologicaFuels.PEAT_BURN_TIME));
     public static final DeferredItem<BlockItem> DRIED_FEN_SOIL = ITEMS.registerSimpleBlockItem(EcologicaBlocks.DRIED_FEN_SOIL);
     public static final DeferredItem<Item> RAW_BOG_IRON = ITEMS.registerSimpleItem("raw_bog_iron");
 

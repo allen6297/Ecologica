@@ -2,32 +2,25 @@ package com.allen6297.ecologica.gametest;
 
 import java.util.List;
 
-import com.allen6297.ecologica.Ecologica;
 import com.allen6297.ecologica.block.FenMossBlock;
 import com.allen6297.ecologica.registry.EcologicaBlocks;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.gametest.GameTestHolder;
-import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 /**
  * The fen loop, driven directly so the test does not wait on random ticks.
- * The structure is a stone slab; each test lays its own mud.
+ * The structure is a stone slab; each test lays its own floor.
  */
-@GameTestHolder(Ecologica.MOD_ID)
-@PrefixGameTestTemplate(false)
 public class FenMossTests {
     private static final BlockPos PATCH = new BlockPos(3, 2, 3);
 
-    @GameTest(template = "platform")
-    public void seepFormsOneConcretionAndLeavesTheMoss(GameTestHelper helper) {
+    public static void seepFormsOneConcretionAndLeavesTheMoss(GameTestHelper helper) {
         layPatch(helper);
         ServerLevel level = helper.getLevel();
         boolean formed = FenMossBlock.trySeep(level, helper.absolutePos(PATCH), RandomSource.create(1));
@@ -42,8 +35,7 @@ public class FenMossTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void seepDoesNothingBelowThePatchSize(GameTestHelper helper) {
+    public static void seepDoesNothingBelowThePatchSize(GameTestHelper helper) {
         helper.setBlock(PATCH.below(), EcologicaBlocks.PEAT.get());
         helper.setBlock(PATCH, EcologicaBlocks.FEN_MOSS.get());
         helper.setBlock(PATCH.east().below(), EcologicaBlocks.PEAT.get());
@@ -56,8 +48,7 @@ public class FenMossTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void seepPausesWhenTheNeighborhoodIsFull(GameTestHelper helper) {
+    public static void seepPausesWhenTheNeighborhoodIsFull(GameTestHelper helper) {
         layPatch(helper);
         // Three concretions already in the patch, none of them under the moss, so there is still sediment to convert.
         helper.setBlock(new BlockPos(1, 1, 1), EcologicaBlocks.BOG_IRON_ORE.get());
@@ -71,8 +62,7 @@ public class FenMossTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void strippingThePatchStopsTheSeep(GameTestHelper helper) {
+    public static void strippingThePatchStopsTheSeep(GameTestHelper helper) {
         layPatch(helper);
         helper.setBlock(PATCH.east(), Blocks.AIR);
         helper.setBlock(PATCH.south(), Blocks.AIR);
@@ -85,8 +75,7 @@ public class FenMossTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void diggingTheSedimentReturnsTheMoss(GameTestHelper helper) {
+    public static void diggingTheSedimentReturnsTheMoss(GameTestHelper helper) {
         helper.setBlock(PATCH.below(), Blocks.MUD);
         helper.setBlock(PATCH, EcologicaBlocks.FEN_MOSS.get());
         helper.setBlock(PATCH.below(), Blocks.STONE);
@@ -100,8 +89,7 @@ public class FenMossTests {
         helper.succeed();
     }
 
-    @GameTest(template = "platform")
-    public void spreadFollowsTheFenTag(GameTestHelper helper) {
+    public static void spreadFollowsTheFenTag(GameTestHelper helper) {
         BlockPos neighbor = PATCH.east();
         for (int dx = -1; dx <= 1; dx++) {
             for (int dz = -1; dz <= 1; dz++) {

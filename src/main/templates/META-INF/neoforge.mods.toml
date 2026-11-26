@@ -4,12 +4,6 @@
 # Note that there are a couple of TOML lists in this file.
 # Find more information on toml format here:  https://github.com/toml-lang/toml
 
-# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
-modLoader="javafml" #mandatory
-
-# A version range to match for said mod loader - for regular FML @Mod it will be the FML version. This is currently 2.
-loaderVersion="${loader_version_range}" #mandatory
-
 # The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
 # "All Rights Reserved" is a placeholder. The project owner has not chosen a license yet; see the README.
 license="${mod_license}"
@@ -51,8 +45,8 @@ Bog iron is a wetland concretion. Fen moss builds peat, and peat left covered sl
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
-#[[mixins]]
-#config="${mod_id}.mixins.json"
+[[mixins]]
+config="ecologica.mixins.json"
 
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg

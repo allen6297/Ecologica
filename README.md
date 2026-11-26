@@ -1,6 +1,6 @@
 # Ecologica
 
-Ecologica is a NeoForge mod for Minecraft 1.21.1 (mod id `ecologica`). Geology and ecology are one system: the ground decides what can live there, and living things change the ground.
+Ecologica is a NeoForge mod for Minecraft 26.3 (mod id `ecologica`). Geology and ecology are one system: the ground decides what can live there, and living things change the ground.
 
 The design, including the three principles borrowed from Klei Wright's essay ["How can we make Minecraft feel alive? (It isn't structures)"](https://youtu.be/cBmt2FNP1Ug), is in [`docs/DESIGN.md`](docs/DESIGN.md).
 
@@ -14,7 +14,7 @@ The tundra, lichen, and muskox described in the design doc are not implemented y
 
 ## Requirements
 
-- JDK 21, 64-bit. NeoForge supports the Microsoft build of OpenJDK; other JDK 21 builds work too.
+- JDK 25, 64-bit. Minecraft 26.3 ships Java 25 to players, so the mod targets Java 25.
 - A display is required for `runClient`. The data generator and `build` do not need one.
 
 ## Build and run
@@ -25,7 +25,7 @@ The Gradle wrapper is included. The first run downloads Minecraft, NeoForge, and
 ./gradlew build
 ```
 
-Produces `build/libs/ecologica-0.3.0.jar`.
+Produces `build/libs/ecologica-0.4.0.jar`.
 
 ```bash
 ./gradlew runData
@@ -53,13 +53,13 @@ Launches a dedicated server.
 ./gradlew runGameTestServer
 ```
 
-Runs the fen-moss game tests (the seep, the patch size, the full-neighborhood pause, stripping, and the biome gate on spread).
+Runs the fen game tests: the seep, the patch size, the full-neighborhood pause, stripping, the biome gate on spread, peat building, drying, rewetting, and the 800-tick burn time.
 
 Import the repository as a Gradle project in IntelliJ IDEA or Eclipse. If libraries look missing, run `./gradlew --refresh-dependencies`.
 
 Mojang's official names are used for Minecraft methods and fields. Those names are under Mojang's mapping license: <https://github.com/NeoForged/NeoForm/blob/main/Mojang.md>.
 
-The project was started from the [NeoForge 1.21.1 ModDevGradle MDK](https://github.com/NeoForgeMDKs/MDK-1.21.1-ModDevGradle) (ModDevGradle 2.0.148, NeoForge 21.1.267, Java 21).
+The project follows the [NeoForge 26.3 ModDevGradle MDK](https://github.com/NeoForgeMDKs/MDK-26.3-ModDevGradle): ModDevGradle 2.0.148, NeoForge 26.3.0.118, Java 25. Data generation is `./gradlew runData`, which runs the MDK's `clientData` configuration and writes both client and server data.
 
 ## License
 
