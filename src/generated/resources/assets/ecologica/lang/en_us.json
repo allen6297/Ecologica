@@ -1,6 +1,8 @@
 {
   "block.ecologica.bog_iron_ore": "Bog Iron Ore",
+  "block.ecologica.dried_fen_soil": "Dried Fen Soil",
   "block.ecologica.fen_moss": "Fen Moss",
+  "block.ecologica.peat": "Peat",
   "item.ecologica.raw_bog_iron": "Raw Bog Iron",
   "itemGroup.ecologica": "Ecologica"
 }

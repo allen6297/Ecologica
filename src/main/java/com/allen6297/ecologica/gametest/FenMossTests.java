@@ -44,15 +44,15 @@ public class FenMossTests {
 
     @GameTest(template = "platform")
     public void seepDoesNothingBelowThePatchSize(GameTestHelper helper) {
-        helper.setBlock(PATCH.below(), Blocks.MUD);
+        helper.setBlock(PATCH.below(), EcologicaBlocks.PEAT.get());
         helper.setBlock(PATCH, EcologicaBlocks.FEN_MOSS.get());
-        helper.setBlock(PATCH.east().below(), Blocks.MUD);
+        helper.setBlock(PATCH.east().below(), EcologicaBlocks.PEAT.get());
         helper.setBlock(PATCH.east(), EcologicaBlocks.FEN_MOSS.get());
         boolean formed = FenMossBlock.trySeep(helper.getLevel(), helper.absolutePos(PATCH), RandomSource.create(2));
         if (formed) {
             helper.fail("two moss blocks are not a working patch");
         }
-        helper.assertBlockPresent(Blocks.MUD, PATCH.below());
+        helper.assertBlockPresent(EcologicaBlocks.PEAT.get(), PATCH.below());
         helper.succeed();
     }
 
@@ -67,7 +67,7 @@ public class FenMossTests {
         if (formed) {
             helper.fail("a full seep should wait until a concretion is dug");
         }
-        helper.assertBlockPresent(Blocks.MUD, PATCH.below());
+        helper.assertBlockPresent(EcologicaBlocks.PEAT.get(), PATCH.below());
         helper.succeed();
     }
 
@@ -81,7 +81,7 @@ public class FenMossTests {
         if (formed) {
             helper.fail("stripping the patch should stop new bog iron");
         }
-        helper.assertBlockPresent(Blocks.MUD, PATCH.below());
+        helper.assertBlockPresent(EcologicaBlocks.PEAT.get(), PATCH.below());
         helper.succeed();
     }
 
@@ -129,7 +129,7 @@ public class FenMossTests {
     private static void layPatch(GameTestHelper helper) {
         BlockPos[] floor = {PATCH, PATCH.east(), PATCH.south(), PATCH.east().south()};
         for (BlockPos moss : floor) {
-            helper.setBlock(moss.below(), Blocks.MUD);
+            helper.setBlock(moss.below(), EcologicaBlocks.PEAT.get());
             helper.setBlock(moss, EcologicaBlocks.FEN_MOSS.get());
         }
     }

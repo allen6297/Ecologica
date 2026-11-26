@@ -34,7 +34,9 @@ public class FenMossBlock extends CarpetBlock {
     public static final int MAX_ORE_IN_PATCH = 3;
     /** One in this many random ticks attempts to spread. */
     public static final int SPREAD_ODDS = 4;
-    /** One in this many random ticks attempts to precipitate bog iron. */
+    /** One in this many random ticks turns mineral sediment under the moss into peat. */
+    public static final int ACCUMULATE_ODDS = 8;
+    /** One in this many random ticks attempts to precipitate bog iron into peat. */
     public static final int SEEP_ODDS = 10;
 
     public FenMossBlock(BlockBehaviour.Properties properties) {
@@ -67,6 +69,9 @@ public class FenMossBlock extends CarpetBlock {
         if (random.nextInt(SPREAD_ODDS) == 0) {
             trySpread(level, pos, random);
         }
+        if (random.nextInt(ACCUMULATE_ODDS) == 0) {
+            tryAccumulate(level, pos, random);
+        }
         if (random.nextInt(SEEP_ODDS) == 0) {
             trySeep(level, pos, random);
         }
@@ -97,11 +102,31 @@ public class FenMossBlock extends CarpetBlock {
     }
 
     /**
-     * Precipitates one bog-iron concretion into sediment that still has moss on it.
-     * A patch smaller than {@link #MIN_PATCH} does nothing. A patch that already holds
-     * {@link #MAX_ORE_IN_PATCH} concretions waits.
+     * Builds one peat block from mineral sediment that still has moss on it.
+     * Bog iron does not skip this step: the seep precipitates into peat, not into bare mud.
      *
-     * @return true when a sediment block became bog iron
+     * @return true when a sediment block became peat
+     */
+    public static boolean tryAccumulate(ServerLevel level, BlockPos origin, RandomSource random) {
+        if (count(level, origin, state -> state.is(EcologicaBlocks.FEN_MOSS.get())) < MIN_PATCH) {
+            return false;
+        }
+        List<BlockPos> candidates = sedimentUnderMoss(level, origin, state ->
+                state.is(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES) && !state.is(EcologicaBlocks.PEAT.get()));
+        if (candidates.isEmpty()) {
+            return false;
+        }
+        BlockPos chosen = candidates.get(random.nextInt(candidates.size()));
+        level.setBlock(chosen, EcologicaBlocks.PEAT.get().defaultBlockState(), Block.UPDATE_ALL);
+        return true;
+    }
+
+    /**
+     * Precipitates one bog-iron concretion into peat that still has moss on it.
+     * A patch smaller than {@link #MIN_PATCH} does nothing. A patch that already holds
+     * {@link #MAX_ORE_IN_PATCH} concretions waits. Mineral mud is left for {@link #tryAccumulate}.
+     *
+     * @return true when a peat block became bog iron
      */
     public static boolean trySeep(ServerLevel level, BlockPos origin, RandomSource random) {
         if (count(level, origin, state -> state.is(EcologicaBlocks.FEN_MOSS.get())) < MIN_PATCH) {
@@ -110,6 +135,16 @@ public class FenMossBlock extends CarpetBlock {
         if (count(level, origin, state -> state.is(EcologicaBlocks.BOG_IRON_ORE.get())) >= MAX_ORE_IN_PATCH) {
             return false;
         }
+        List<BlockPos> candidates = sedimentUnderMoss(level, origin, state -> state.is(EcologicaBlocks.PEAT.get()));
+        if (candidates.isEmpty()) {
+            return false;
+        }
+        BlockPos chosen = candidates.get(random.nextInt(candidates.size()));
+        level.setBlock(chosen, EcologicaBlocks.BOG_IRON_ORE.get().defaultBlockState(), Block.UPDATE_ALL);
+        return true;
+    }
+
+    private static List<BlockPos> sedimentUnderMoss(ServerLevel level, BlockPos origin, java.util.function.Predicate<BlockState> sediment) {
         List<BlockPos> candidates = new ArrayList<>();
         for (int dy = -1; dy <= 1; dy++) {
             for (int dx = -PATCH_RADIUS; dx <= PATCH_RADIUS; dx++) {
@@ -118,19 +153,14 @@ public class FenMossBlock extends CarpetBlock {
                     if (!level.getBlockState(moss).is(EcologicaBlocks.FEN_MOSS.get())) {
                         continue;
                     }
-                    BlockPos sediment = moss.below();
-                    if (level.getBlockState(sediment).is(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES)) {
-                        candidates.add(sediment);
+                    BlockPos below = moss.below();
+                    if (sediment.test(level.getBlockState(below))) {
+                        candidates.add(below);
                     }
                 }
             }
         }
-        if (candidates.isEmpty()) {
-            return false;
-        }
-        BlockPos chosen = candidates.get(random.nextInt(candidates.size()));
-        level.setBlock(chosen, EcologicaBlocks.BOG_IRON_ORE.get().defaultBlockState(), Block.UPDATE_ALL);
-        return true;
+        return candidates;
     }
 
     private static int count(ServerLevel level, BlockPos origin, java.util.function.Predicate<BlockState> test) {

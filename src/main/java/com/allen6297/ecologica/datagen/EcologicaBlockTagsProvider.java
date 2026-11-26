@@ -21,7 +21,10 @@ public class EcologicaBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(EcologicaBlocks.BOG_IRON_ORE.get());
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
+                EcologicaBlocks.BOG_IRON_ORE.get(),
+                EcologicaBlocks.PEAT.get(),
+                EcologicaBlocks.DRIED_FEN_SOIL.get());
         tag(Tags.Blocks.ORES_IRON).add(EcologicaBlocks.BOG_IRON_ORE.get());
         tag(Tags.Blocks.ORE_RATES_SINGULAR).add(EcologicaBlocks.BOG_IRON_ORE.get());
         tag(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES).add(
@@ -29,7 +32,8 @@ public class EcologicaBlockTagsProvider extends BlockTagsProvider {
                 Blocks.COARSE_DIRT,
                 Blocks.ROOTED_DIRT,
                 Blocks.MUD,
-                Blocks.CLAY);
+                Blocks.CLAY,
+                EcologicaBlocks.PEAT.get());
         tag(EcologicaTags.Blocks.FEN_MOSS_SUPPORTS)
                 .addTag(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES)
                 .add(EcologicaBlocks.BOG_IRON_ORE.get());
