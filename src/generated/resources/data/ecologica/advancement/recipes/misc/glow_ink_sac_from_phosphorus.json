@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_phosphorus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ecologica:phosphorus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "ecologica:glow_ink_sac_from_phosphorus"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_phosphorus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ecologica:glow_ink_sac_from_phosphorus"
+    ]
+  }
+}

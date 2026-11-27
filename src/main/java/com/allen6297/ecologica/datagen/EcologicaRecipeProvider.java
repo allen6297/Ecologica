@@ -58,5 +58,23 @@ public final class EcologicaRecipeProvider extends RecipeProvider {
                         100)
                 .unlockedBy("has_raw_bog_iron", has(EcologicaItems.RAW_BOG_IRON.get()))
                 .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "raw_bog_iron_from_blasting")));
+
+        SimpleCookingRecipeBuilder.smelting(
+                        Ingredient.of(
+                                Items.GLOW_LICHEN,
+                                EcologicaItems.SPROUTED_GLOW_LICHEN.get(),
+                                EcologicaItems.SHEARED_GLOW_LICHEN.get()),
+                        RecipeCategory.MISC,
+                        CookingBookCategory.MISC,
+                        EcologicaItems.PHOSPHORUS.get(),
+                        0.1F,
+                        200)
+                .unlockedBy("has_glow_lichen", has(Items.GLOW_LICHEN))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "phosphorus_from_smelting_lichen")));
+
+        shapeless(RecipeCategory.MISC, Items.GLOW_INK_SAC)
+                .requires(EcologicaItems.PHOSPHORUS.get())
+                .unlockedBy("has_phosphorus", has(EcologicaItems.PHOSPHORUS.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "glow_ink_sac_from_phosphorus")));
     }
 }

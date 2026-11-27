@@ -9,8 +9,10 @@ What is in the game:
 - **Bog iron**, a soft iron concretion in wetland mud. It generates in swamps and mangrove swamps, is mined with a shovel, and the raw item smelts to an iron ingot.
 - **Fen moss**, a living skin on that mud. A patch of four or more turns the mud under it into peat, and turns peat into bog iron, until three concretions are nearby. Strip the patch and the seep stops.
 - **Peat**, the fen's organic layer. Shovel it up and it burns in a furnace for 800 ticks, four items. Leave a placed peat block with no moss and no water against it and it becomes dried fen soil. Water against that crust turns it back into mud.
+- **Tundra ground** in snowy plains (the `ecologica:has_greenstone` tag). Soil and ordinary stone become deepslate up to the surface. Smooth basalt disks are the greenstone belts. Each belt has smooth basalt iron ore, one raw iron block, and a short vein of ore continuing down.
+- **Sprouted glow lichen**. Bone meal on glow lichen sprouts it. In sunlight it turns stone into gravel, gravel into sand, and sand into dirt, or it spreads ordinary glow lichen within eight blocks. Shears pause it. Mud is left alone. Smelting lichen gives phosphorus, which crafts into a glow ink sac.
 
-The tundra, lichen, and muskox described in the design doc are not implemented yet.
+Muskox herds, predators, dwarf trees, and the shrubs that follow weathered rock are not implemented yet.
 
 ## Requirements
 
@@ -25,7 +27,7 @@ The Gradle wrapper is included. The first run downloads Minecraft, NeoForge, and
 ./gradlew build
 ```
 
-Produces `build/libs/ecologica-0.4.0.jar`.
+Produces `build/libs/ecologica-0.5.0.jar`.
 
 ```bash
 ./gradlew runData
@@ -37,7 +39,7 @@ Regenerates models, language, loot, recipes, tags, and worldgen JSON into `src/g
 ./gradlew runClient
 ```
 
-Launches a Minecraft client with the mod loaded. Bog iron, fen moss, peat, and dried fen soil are on the **Ecologica** creative tab.
+Launches a Minecraft client with the mod loaded. The fen blocks, smooth basalt iron ore, sprouted and sheared glow lichen, and phosphorus are on the **Ecologica** creative tab. The client needs Java 25. An IDE run configuration still pointed at Java 21 fails before the game starts.
 
 In a survival world, look in a swamp or mangrove swamp. Bog iron is between Y=48 and Y=68 in dirt, mud, clay, or peat, and it is dug with a shovel. A pickaxe does not collect it. Peat generates a little higher, about Y=60 to Y=72, in mud, dirt, and clay. Fen moss generates as a carpet on those sediments.
 
@@ -53,7 +55,7 @@ Launches a dedicated server.
 ./gradlew runGameTestServer
 ```
 
-Runs the fen game tests: the seep, the patch size, the full-neighborhood pause, stripping, the biome gate on spread, peat building, drying, rewetting, and the 800-tick burn time.
+Runs the fen game tests and the tundra tests: the deepslate column, the greenstone belt, weathering, shears, shade, lichen spread, and bone meal.
 
 Import the repository as a Gradle project in IntelliJ IDEA or Eclipse. If libraries look missing, run `./gradlew --refresh-dependencies`.
 

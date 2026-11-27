@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ecologica:sheared_glow_lichen"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "ecologica:blocks/sheared_glow_lichen"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#ecologica:has_greenstone",
+  "features": "ecologica:tundra_column",
+  "step": "local_modifications"
+}

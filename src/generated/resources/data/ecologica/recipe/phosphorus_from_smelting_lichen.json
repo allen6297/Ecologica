@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": [
+    "minecraft:glow_lichen",
+    "ecologica:sprouted_glow_lichen",
+    "ecologica:sheared_glow_lichen"
+  ],
+  "result": {
+    "id": "ecologica:phosphorus"
+  }
+}

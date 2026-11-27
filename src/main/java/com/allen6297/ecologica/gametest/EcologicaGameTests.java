@@ -49,6 +49,18 @@ public final class EcologicaGameTests {
             registerFunction(output, "water_rewets_dried_soil", FenSoilTests::waterTurnsDriedSoilBackIntoMud);
             registerFunction(output, "moss_pops_off_dried_soil", FenSoilTests::mossPopsOffDriedSoil);
             registerFunction(output, "peat_is_furnace_fuel", FenSoilTests::peatBurnsLongerThanAPlankAndShorterThanCoal);
+            registerFunction(output, "column_turns_soil_and_stone_into_deepslate", TundraTests::columnTurnsSoilAndStoneIntoDeepslate);
+            registerFunction(output, "column_leaves_water_and_wood", TundraTests::columnLeavesWaterAndWood);
+            registerFunction(output, "belt_sets_greenstone_ore_and_a_vein", TundraTests::beltSetsGreenstoneOreAndAVein);
+            registerFunction(output, "stone_weathers_to_gravel", TundraTests::stoneWeathersToGravel);
+            registerFunction(output, "gravel_weathers_to_sand", TundraTests::gravelWeathersToSand);
+            registerFunction(output, "sand_weathers_to_soil", TundraTests::sandWeathersToSoil);
+            registerFunction(output, "mud_does_not_weather", TundraTests::mudDoesNotWeather);
+            registerFunction(output, "shears_halt_weathering", TundraTests::shearsHaltWeathering);
+            registerFunction(output, "shade_halts_weathering", TundraTests::shadeHaltsWeathering);
+            registerFunction(output, "lichen_spreads_within_eight", TundraTests::lichenSpreadsWithinEight);
+            registerFunction(output, "lichen_does_not_spread_past_eight", TundraTests::lichenDoesNotSpreadPastEight);
+            registerFunction(output, "bonemeal_sprouts_glow_lichen", TundraTests::bonemealSproutsGlowLichen);
         });
     }
 
@@ -72,7 +84,19 @@ public final class EcologicaGameTests {
                 "water_keeps_peat_wet",
                 "water_rewets_dried_soil",
                 "moss_pops_off_dried_soil",
-                "peat_is_furnace_fuel")) {
+                "peat_is_furnace_fuel",
+                "column_turns_soil_and_stone_into_deepslate",
+                "column_leaves_water_and_wood",
+                "belt_sets_greenstone_ore_and_a_vein",
+                "stone_weathers_to_gravel",
+                "gravel_weathers_to_sand",
+                "sand_weathers_to_soil",
+                "mud_does_not_weather",
+                "shears_halt_weathering",
+                "shade_halts_weathering",
+                "lichen_spreads_within_eight",
+                "lichen_does_not_spread_past_eight",
+                "bonemeal_sprouts_glow_lichen")) {
             Identifier id = Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, name);
             event.registerTest(id, new FunctionGameTestInstance(ResourceKey.create(Registries.TEST_FUNCTION, id), data));
         }

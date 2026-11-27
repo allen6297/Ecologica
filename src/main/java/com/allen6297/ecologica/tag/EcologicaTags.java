@@ -23,6 +23,19 @@ public final class EcologicaTags {
                 Registries.BLOCK,
                 Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "fen_moss_supports"));
 
+        /**
+         * Soil and stone the tundra column may turn into deepslate. Water, ice, and wood are absent
+         * on purpose, so a lake or a tree is not rewritten.
+         */
+        public static final TagKey<Block> TUNDRA_COLUMN_REPLACEABLES = TagKey.create(
+                Registries.BLOCK,
+                Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "tundra_column_replaceables"));
+
+        /** Blocks sprouted glow lichen can sit on, including mud, which it will not eat. */
+        public static final TagKey<Block> LICHEN_SUPPORTS = TagKey.create(
+                Registries.BLOCK,
+                Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "lichen_supports"));
+
         private Blocks() {}
     }
 
@@ -35,6 +48,22 @@ public final class EcologicaTags {
         public static final TagKey<Biome> HAS_BOG_IRON = TagKey.create(
                 Registries.BIOME,
                 Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "has_bog_iron"));
+
+        /**
+         * Biomes that receive the deepslate column and greenstone belts.
+         * Vanilla snowy plains are the first invitation. A pack adds its own tundra by joining the tag.
+         */
+        public static final TagKey<Biome> HAS_GREENSTONE = TagKey.create(
+                Registries.BIOME,
+                Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "has_greenstone"));
+
+        /**
+         * Biomes where sprouted glow lichen generates. Bonemeal can still sprout lichen anywhere.
+         * Lichen woodlands will join this tag when that biome exists.
+         */
+        public static final TagKey<Biome> HAS_SPROUTED_LICHEN = TagKey.create(
+                Registries.BIOME,
+                Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "has_sprouted_lichen"));
 
         private Biomes() {}
     }

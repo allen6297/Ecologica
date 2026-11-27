@@ -11,9 +11,15 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 public final class EcologicaLootTableProvider {
     public static SingleRegistryBootstrap<LootTable> bootstrap() {
@@ -35,6 +41,16 @@ public final class EcologicaLootTableProvider {
             accept(EcologicaBlocks.FEN_MOSS.get(), createSingleItemTable(EcologicaBlocks.FEN_MOSS.get()));
             accept(EcologicaBlocks.PEAT.get(), createSingleItemTable(EcologicaBlocks.PEAT.get()));
             accept(EcologicaBlocks.DRIED_FEN_SOIL.get(), createSingleItemTable(EcologicaBlocks.DRIED_FEN_SOIL.get()));
+            Block bandedIron = EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get();
+            accept(bandedIron, createSilkTouchDispatchTable(
+                    bandedIron,
+                    applyExplosionDecay(
+                            bandedIron,
+                            LootItem.lootTableItem(Items.RAW_IRON)
+                                    .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(2)))
+                                    .apply(ApplyBonusCount.addOreBonusCount(this.enchantments.getOrThrow(Enchantments.FORTUNE))))));
+            accept(EcologicaBlocks.SPROUTED_GLOW_LICHEN.get(), createSingleItemTable(EcologicaBlocks.SPROUTED_GLOW_LICHEN.get()));
+            accept(EcologicaBlocks.SHEARED_GLOW_LICHEN.get(), createSingleItemTable(EcologicaBlocks.SHEARED_GLOW_LICHEN.get()));
         }
 
         @Override

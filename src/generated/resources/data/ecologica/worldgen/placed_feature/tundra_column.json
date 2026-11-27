@@ -1,0 +1,8 @@
+{
+  "feature": "ecologica:tundra_column",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

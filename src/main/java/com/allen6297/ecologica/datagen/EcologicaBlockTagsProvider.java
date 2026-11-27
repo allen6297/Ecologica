@@ -37,6 +37,37 @@ public class EcologicaBlockTagsProvider extends BlockTagsProvider {
         tag(EcologicaTags.Blocks.FEN_MOSS_SUPPORTS)
                 .addTag(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES)
                 .add(key(EcologicaBlocks.BOG_IRON_ORE.get()));
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(key(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get()));
+        tag(BlockTags.NEEDS_STONE_TOOL).add(key(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get()));
+        tag(Tags.Blocks.ORES_IRON).add(key(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get()));
+        tag(Tags.Blocks.ORE_RATES_DENSE).add(key(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get()));
+
+        tag(EcologicaTags.Blocks.TUNDRA_COLUMN_REPLACEABLES).add(
+                key(Blocks.GRASS_BLOCK),
+                key(Blocks.DIRT),
+                key(Blocks.COARSE_DIRT),
+                key(Blocks.PODZOL),
+                key(Blocks.ROOTED_DIRT),
+                key(Blocks.DIRT_PATH),
+                key(Blocks.STONE),
+                key(Blocks.ANDESITE),
+                key(Blocks.DIORITE),
+                key(Blocks.GRANITE),
+                key(Blocks.TUFF));
+        tag(EcologicaTags.Blocks.LICHEN_SUPPORTS).add(
+                key(Blocks.STONE),
+                key(Blocks.DEEPSLATE),
+                key(Blocks.SMOOTH_BASALT),
+                key(Blocks.COBBLESTONE),
+                key(Blocks.TUFF),
+                key(Blocks.ANDESITE),
+                key(Blocks.DIORITE),
+                key(Blocks.GRANITE),
+                key(Blocks.GRAVEL),
+                key(Blocks.SAND),
+                key(Blocks.DIRT),
+                key(Blocks.MUD));
     }
 
     private static ResourceKey<Block> key(Block block) {

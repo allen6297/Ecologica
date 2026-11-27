@@ -3,6 +3,10 @@
   "block.ecologica.dried_fen_soil": "Dried Fen Soil",
   "block.ecologica.fen_moss": "Fen Moss",
   "block.ecologica.peat": "Peat",
+  "block.ecologica.sheared_glow_lichen": "Sheared Glow Lichen",
+  "block.ecologica.smooth_basalt_iron_ore": "Smooth Basalt Iron Ore",
+  "block.ecologica.sprouted_glow_lichen": "Sprouted Glow Lichen",
+  "item.ecologica.phosphorus": "Phosphorus",
   "item.ecologica.raw_bog_iron": "Raw Bog Iron",
   "itemGroup.ecologica": "Ecologica"
 }
