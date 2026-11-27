@@ -4,6 +4,7 @@ import com.allen6297.ecologica.Ecologica;
 import com.allen6297.ecologica.block.DriedFenSoilBlock;
 import com.allen6297.ecologica.block.FenMossBlock;
 import com.allen6297.ecologica.block.PeatBlock;
+import com.allen6297.ecologica.block.SproutedGlowLichenBlock;
 
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.DropExperienceBlock;
@@ -64,6 +65,42 @@ public final class EcologicaBlocks {
                     .strength(0.5F)
                     .sound(SoundType.GRAVEL)
                     .randomTicks());
+
+    /**
+     * Banded iron in a greenstone belt. Pickaxe, not shovel. The drop is two raw iron,
+     * richer than vanilla ore, because the belt is the concentration.
+     */
+    public static final DeferredBlock<DropExperienceBlock> SMOOTH_BASALT_IRON_ORE = BLOCKS.registerBlock(
+            "smooth_basalt_iron_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(0, 1), properties),
+            properties -> properties
+                    .mapColor(MapColor.GLOW_LICHEN)
+                    .strength(3.0F, 3.0F)
+                    .sound(SoundType.BASALT)
+                    .requiresCorrectToolForDrops());
+
+    /** Glow lichen that weathers rock in sunlight until someone shears it. */
+    public static final DeferredBlock<SproutedGlowLichenBlock> SPROUTED_GLOW_LICHEN = BLOCKS.registerBlock(
+            "sprouted_glow_lichen",
+            properties -> new SproutedGlowLichenBlock(properties, true),
+            properties -> properties
+                    .mapColor(MapColor.GLOW_LICHEN)
+                    .strength(0.2F)
+                    .sound(SoundType.VINE)
+                    .lightLevel(state -> 7)
+                    .noOcclusion()
+                    .randomTicks());
+
+    /** The same lichen after shears. It stays, and it stops eating the rock. */
+    public static final DeferredBlock<SproutedGlowLichenBlock> SHEARED_GLOW_LICHEN = BLOCKS.registerBlock(
+            "sheared_glow_lichen",
+            properties -> new SproutedGlowLichenBlock(properties, false),
+            properties -> properties
+                    .mapColor(MapColor.GLOW_LICHEN)
+                    .strength(0.2F)
+                    .sound(SoundType.VINE)
+                    .lightLevel(state -> 7)
+                    .noOcclusion());
 
     private EcologicaBlocks() {}
 }

@@ -27,6 +27,8 @@ public class EcologicaItemTagsProvider extends ItemTagsProvider {
         tag(Tags.Items.RAW_MATERIALS_IRON).add(key(EcologicaItems.RAW_BOG_IRON.get()));
         tag(Tags.Items.ORES_IRON).add(key(EcologicaBlocks.BOG_IRON_ORE.get().asItem()));
         tag(Tags.Items.ORE_RATES_SINGULAR).add(key(EcologicaBlocks.BOG_IRON_ORE.get().asItem()));
+        tag(Tags.Items.ORES_IRON).add(key(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get().asItem()));
+        tag(Tags.Items.ORE_RATES_DENSE).add(key(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get().asItem()));
     }
 
     private static ResourceKey<Item> key(Item item) {

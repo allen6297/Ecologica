@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#ecologica:has_sprouted_lichen",
+  "features": "ecologica:sprouted_lichen",
+  "step": "vegetal_decoration"
+}

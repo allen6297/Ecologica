@@ -19,6 +19,10 @@ public class EcologicaLanguageProvider extends LanguageProvider {
         add(EcologicaBlocks.PEAT.get(), "Peat");
         add(EcologicaBlocks.DRIED_FEN_SOIL.get(), "Dried Fen Soil");
         add(EcologicaItems.RAW_BOG_IRON.get(), "Raw Bog Iron");
+        add(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get(), "Smooth Basalt Iron Ore");
+        add(EcologicaBlocks.SPROUTED_GLOW_LICHEN.get(), "Sprouted Glow Lichen");
+        add(EcologicaBlocks.SHEARED_GLOW_LICHEN.get(), "Sheared Glow Lichen");
+        add(EcologicaItems.PHOSPHORUS.get(), "Phosphorus");
         add("itemGroup.ecologica", "Ecologica");
     }
 }

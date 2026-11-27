@@ -22,6 +22,10 @@ public final class EcologicaCreativeTabs {
                 output.accept(EcologicaItems.FEN_MOSS.get());
                 output.accept(EcologicaItems.PEAT.get());
                 output.accept(EcologicaItems.DRIED_FEN_SOIL.get());
+                output.accept(EcologicaItems.SMOOTH_BASALT_IRON_ORE.get());
+                output.accept(EcologicaItems.SPROUTED_GLOW_LICHEN.get());
+                output.accept(EcologicaItems.SHEARED_GLOW_LICHEN.get());
+                output.accept(EcologicaItems.PHOSPHORUS.get());
             })
             .build());
 

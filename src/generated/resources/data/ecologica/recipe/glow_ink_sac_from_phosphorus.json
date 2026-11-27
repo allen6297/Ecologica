@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "ecologica:phosphorus"
+  ],
+  "result": {
+    "id": "minecraft:glow_ink_sac"
+  }
+}

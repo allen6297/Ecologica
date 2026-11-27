@@ -62,6 +62,21 @@ public final class EcologicaWorldgen {
     /** Must match {@code features} in {@code data/ecologica/neoforge/biome_modifier/peat.json}. */
     public static final ResourceKey<PlacedFeature> PEAT_PLACED = placed("peat");
 
+    public static final int GREENSTONE_BELTS_PER_CHUNK = 2;
+    public static final int SPROUTED_LICHEN_PER_CHUNK = 2;
+
+    public static final ResourceKey<Feature> TUNDRA_COLUMN = feature("tundra_column");
+    /** Must match {@code features} in {@code data/ecologica/neoforge/biome_modifier/tundra_column.json}. */
+    public static final ResourceKey<PlacedFeature> TUNDRA_COLUMN_PLACED = placed("tundra_column");
+
+    public static final ResourceKey<Feature> GREENSTONE_BELT = feature("greenstone_belt");
+    /** Must match {@code features} in {@code data/ecologica/neoforge/biome_modifier/greenstone_belt.json}. */
+    public static final ResourceKey<PlacedFeature> GREENSTONE_BELT_PLACED = placed("greenstone_belt");
+
+    public static final ResourceKey<Feature> SPROUTED_LICHEN = feature("sprouted_lichen");
+    /** Must match {@code features} in {@code data/ecologica/neoforge/biome_modifier/sprouted_lichen.json}. */
+    public static final ResourceKey<PlacedFeature> SPROUTED_LICHEN_PLACED = placed("sprouted_lichen");
+
     public static void bootstrapFeatures(BootstrapContext<Feature> context) {
         RuleTest wetlandSediment = new TagMatchTest(EcologicaTags.Blocks.BOG_IRON_REPLACEABLES);
         context.register(
@@ -80,6 +95,10 @@ public final class EcologicaWorldgen {
 
         // Moss only survives on wetland sediment, so attempts on grass or water fail.
         context.register(FEN_MOSS, new SimpleBlockFeature(BlockStateProvider.of(EcologicaBlocks.FEN_MOSS.get())));
+
+        context.register(TUNDRA_COLUMN, new TundraColumnFeature());
+        context.register(GREENSTONE_BELT, new GreenstoneBeltFeature());
+        context.register(SPROUTED_LICHEN, new SproutedLichenFeature());
     }
 
     public static void bootstrapPlaced(BootstrapContext<PlacedFeature> context) {
@@ -117,6 +136,27 @@ public final class EcologicaWorldgen {
                                 BiomeFilter.biome(),
                                 CountPlacement.of(FEN_MOSS_TRIES),
                                 OffsetPlacement.ofTriangle(FEN_MOSS_XZ_SPREAD, FEN_MOSS_Y_SPREAD))));
+        context.register(
+                TUNDRA_COLUMN_PLACED,
+                new PlacedFeature(features.getOrThrow(TUNDRA_COLUMN), List.of(BiomeFilter.biome())));
+        context.register(
+                GREENSTONE_BELT_PLACED,
+                new PlacedFeature(
+                        features.getOrThrow(GREENSTONE_BELT),
+                        List.of(
+                                CountPlacement.of(GREENSTONE_BELTS_PER_CHUNK),
+                                InSquarePlacement.spread(),
+                                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                                BiomeFilter.biome())));
+        context.register(
+                SPROUTED_LICHEN_PLACED,
+                new PlacedFeature(
+                        features.getOrThrow(SPROUTED_LICHEN),
+                        List.of(
+                                CountPlacement.of(SPROUTED_LICHEN_PER_CHUNK),
+                                InSquarePlacement.spread(),
+                                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                                BiomeFilter.biome())));
     }
 
     private static ResourceKey<Feature> feature(String path) {

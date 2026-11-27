@@ -33,7 +33,11 @@ public class EcologicaModelProvider extends ModelProvider {
         blockModels.createTrivialCube(EcologicaBlocks.PEAT.get());
         blockModels.createTrivialCube(EcologicaBlocks.DRIED_FEN_SOIL.get());
         carpet(blockModels, EcologicaBlocks.FEN_MOSS.get());
+        blockModels.createTrivialCube(EcologicaBlocks.SMOOTH_BASALT_IRON_ORE.get());
+        carpet(blockModels, EcologicaBlocks.SPROUTED_GLOW_LICHEN.get());
+        carpet(blockModels, EcologicaBlocks.SHEARED_GLOW_LICHEN.get());
         itemModels.generateFlatItem(EcologicaItems.RAW_BOG_IRON.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EcologicaItems.PHOSPHORUS.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private static void carpet(BlockModelGenerators blockModels, Block block) {
