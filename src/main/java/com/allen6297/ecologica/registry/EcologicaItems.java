@@ -5,6 +5,7 @@ import com.allen6297.ecologica.worldgen.EcologicaFuels;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -21,6 +22,10 @@ public final class EcologicaItems {
     public static final DeferredItem<BlockItem> SPROUTED_GLOW_LICHEN = ITEMS.registerSimpleBlockItem(EcologicaBlocks.SPROUTED_GLOW_LICHEN);
     public static final DeferredItem<BlockItem> SHEARED_GLOW_LICHEN = ITEMS.registerSimpleBlockItem(EcologicaBlocks.SHEARED_GLOW_LICHEN);
     public static final DeferredItem<Item> PHOSPHORUS = ITEMS.registerSimpleItem("phosphorus");
+    public static final DeferredItem<Item> QIVIUT = ITEMS.registerSimpleItem("qiviut");
+    public static final DeferredItem<SpawnEggItem> MUSKOX_SPAWN_EGG = ITEMS.registerItem(
+            "muskox_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(EcologicaEntities.MUSKOX.get())));
 
     private EcologicaItems() {}
 }

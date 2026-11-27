@@ -61,6 +61,13 @@ public final class EcologicaGameTests {
             registerFunction(output, "lichen_spreads_within_eight", TundraTests::lichenSpreadsWithinEight);
             registerFunction(output, "lichen_does_not_spread_past_eight", TundraTests::lichenDoesNotSpreadPastEight);
             registerFunction(output, "bonemeal_sprouts_glow_lichen", TundraTests::bonemealSproutsGlowLichen);
+            registerFunction(output, "grazes_unsprouted_lichen", MuskoxTests::grazesUnsproutedLichen);
+            registerFunction(output, "does_not_eat_sprouted_lichen", MuskoxTests::doesNotEatSproutedLichen);
+            registerFunction(output, "ring_forms_around_a_calf", MuskoxTests::ringFormsAroundACalf);
+            registerFunction(output, "ring_waits_without_a_wolf", MuskoxTests::ringWaitsWithoutAWolf);
+            registerFunction(output, "fed_muskox_gives_qiviut", MuskoxTests::fedMuskoxGivesQiviut);
+            registerFunction(output, "crowded_herd_gives_no_qiviut", MuskoxTests::crowdedHerdGivesNoQiviut);
+            registerFunction(output, "fed_wolf_drops_the_hunt", MuskoxTests::fedWolfDropsTheHunt);
         });
     }
 
@@ -96,7 +103,14 @@ public final class EcologicaGameTests {
                 "shade_halts_weathering",
                 "lichen_spreads_within_eight",
                 "lichen_does_not_spread_past_eight",
-                "bonemeal_sprouts_glow_lichen")) {
+                "bonemeal_sprouts_glow_lichen",
+                "grazes_unsprouted_lichen",
+                "does_not_eat_sprouted_lichen",
+                "ring_forms_around_a_calf",
+                "ring_waits_without_a_wolf",
+                "fed_muskox_gives_qiviut",
+                "crowded_herd_gives_no_qiviut",
+                "fed_wolf_drops_the_hunt")) {
             Identifier id = Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, name);
             event.registerTest(id, new FunctionGameTestInstance(ResourceKey.create(Registries.TEST_FUNCTION, id), data));
         }

@@ -26,6 +26,8 @@ public final class EcologicaCreativeTabs {
                 output.accept(EcologicaItems.SPROUTED_GLOW_LICHEN.get());
                 output.accept(EcologicaItems.SHEARED_GLOW_LICHEN.get());
                 output.accept(EcologicaItems.PHOSPHORUS.get());
+                output.accept(EcologicaItems.QIVIUT.get());
+                output.accept(EcologicaItems.MUSKOX_SPAWN_EGG.get());
             })
             .build());
 

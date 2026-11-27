@@ -1,0 +1,13 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#ecologica:has_muskox",
+  "spawners": {
+    "type": "ecologica:muskox",
+    "weight": 8,
+    "count": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 3,
+      "max_inclusive": 5
+    }
+  }
+}

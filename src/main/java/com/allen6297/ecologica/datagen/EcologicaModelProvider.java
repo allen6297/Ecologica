@@ -38,6 +38,8 @@ public class EcologicaModelProvider extends ModelProvider {
         carpet(blockModels, EcologicaBlocks.SHEARED_GLOW_LICHEN.get());
         itemModels.generateFlatItem(EcologicaItems.RAW_BOG_IRON.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(EcologicaItems.PHOSPHORUS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EcologicaItems.QIVIUT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(EcologicaItems.MUSKOX_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private static void carpet(BlockModelGenerators blockModels, Block block) {

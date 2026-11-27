@@ -23,6 +23,9 @@ public class EcologicaLanguageProvider extends LanguageProvider {
         add(EcologicaBlocks.SPROUTED_GLOW_LICHEN.get(), "Sprouted Glow Lichen");
         add(EcologicaBlocks.SHEARED_GLOW_LICHEN.get(), "Sheared Glow Lichen");
         add(EcologicaItems.PHOSPHORUS.get(), "Phosphorus");
+        add(EcologicaItems.QIVIUT.get(), "Qiviut");
+        add(EcologicaItems.MUSKOX_SPAWN_EGG.get(), "Muskox Spawn Egg");
+        add("entity.ecologica.muskox", "Muskox");
         add("itemGroup.ecologica", "Ecologica");
     }
 }

@@ -111,7 +111,7 @@ The Nunavut tundra, as the essay describes it:
 - **Lichen woodlands.** The tree line. Dwarf spruce and pine, dwarf log walls, dwarf log posts. The posts and walls are strippable and give spruce wood. This is a place plants and herds use, not a structure dungeon.
 - **Succession on the rock.** Lichen, then moss, then shrubs, in that order, because each stage makes the next one possible.
 
-Vanilla biomes stay vanilla unless tagged. `ecologica:has_bog_iron` invites swamps. `ecologica:has_greenstone` and `ecologica:has_sprouted_lichen` invite snowy plains. The muskox home tag arrives with the herd.
+Vanilla biomes stay vanilla unless tagged. `ecologica:has_bog_iron` invites swamps. `ecologica:has_greenstone`, `ecologica:has_sprouted_lichen`, and `ecologica:has_muskox` invite snowy plains.
 
 ### How the systems touch
 
@@ -236,9 +236,9 @@ Each milestone should be playable on its own. A milestone is done when a player 
 
 **Milestone 5 — The tree line.** Lichen woodlands as a transition biome. Dwarf spruce and pine; spruce saplings grown there become the dwarf tree. Dwarf log wall and dwarf log post, strippable, yielding spruce wood. Pale sky, drifting snow, white-shifted ice and grass, with the transition biome doing the blend. This is atmosphere in service of the place the herds will use, not a shader demo.
 
-**Milestone 6 — Muskox.** A goat-cousin. Grazes unsprouted lichen only. Herd pathing toward nearby animals and toward lichen colonies, scatter from predators, rejoin later. Wool and string after feeding, much more when the herd is in open sky in its home biome with neighbors but not a crowd; a packed group gives nothing. If an adult died nearby and there are no babies, grazing can start a long natural breeding period.
+**Milestone 6 — Muskox. The herd is in; the recovery breeding is not.** `ecologica:muskox` spawns in packs of 3 to 5 where `ecologica:has_muskox` says so (snowy plains). Spawn also accepts deepslate, smooth basalt, and snow, because the column has already taken the grass. They eat `minecraft:glow_lichen` and never the sprouted or sheared form. Adults more than six blocks from another adult, and still within eighteen, walk back. When a wolf is within twelve blocks of a calf, each adult is given a slot on a circle two and a half blocks out; the goals take that slot instead of fleeing. Shearing drops one qiviut if the muskox has eaten and fewer than four other muskox are in the herd box. A packed group gives nothing. Death drops leather, not meat, and qiviut on the same condition. The model is a plain quadruped and the sounds are the goat's, until a real muskox is licensed. Still deferred: wool and string that pay more under open sky in the home biome, and the long breeding period after an adult dies with no calves left.
 
-**Milestone 7 — Predators that get full.** Polar bears hunt muskox, prefer calves and stragglers, then ignore prey for about two Minecraft days. The carcass does not drop meat. Leather can. The same satiation pattern is the template for any later hunter, including a fix for vanilla wolves and foxes emptying a pen, if we touch those mobs at all.
+**Milestone 7 — Predators that get full. Wolves are in; polar bears are not.** A wild wolf gains a target goal for muskox. When that wolf kills one, it stores a full time of two Minecraft days and drops any animal it was about to chase, including the rest of the herd. Polar bears, a preference for calves, and the same pause on foxes are still deferred. The wolf is the vanilla hunter already in the cold, and the pause is the pattern those later hunters should use.
 
 After that: the bloomery as the better bog-iron path, lime and soil pH, and optional Create recipes. Those are processing, and they wait until the loops they feed exist.
 
