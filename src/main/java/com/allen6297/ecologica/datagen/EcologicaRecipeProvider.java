@@ -38,7 +38,7 @@ public final class EcologicaRecipeProvider extends RecipeProvider {
             }
         };
     }
-    // ...
+
     protected void buildRecipes() {
         SimpleCookingRecipeBuilder.smelting(
                         Ingredient.of(EcologicaItems.RAW_BOG_IRON.get()),
@@ -49,6 +49,14 @@ public final class EcologicaRecipeProvider extends RecipeProvider {
                         200)
                 .unlockedBy("has_raw_bog_iron", has(EcologicaItems.RAW_BOG_IRON.get()))
                 .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "raw_bog_iron_from_smelting")));
-        // blasting recipe uses the same shape, 100 ticks, id raw_bog_iron_from_blasting
+        SimpleCookingRecipeBuilder.blasting(
+                        Ingredient.of(EcologicaItems.RAW_BOG_IRON.get()),
+                        RecipeCategory.MISC,
+                        CookingBookCategory.MISC,
+                        Items.IRON_INGOT,
+                        0.7F,
+                        100)
+                .unlockedBy("has_raw_bog_iron", has(EcologicaItems.RAW_BOG_IRON.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "raw_bog_iron_from_blasting")));
     }
 }
