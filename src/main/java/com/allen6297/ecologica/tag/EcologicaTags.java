@@ -65,6 +65,11 @@ public final class EcologicaTags {
                 Registries.BIOME,
                 Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "has_sprouted_lichen"));
 
+        /** Biomes where muskox herds spawn. Snowy plains first. A pack adds its own tundra here. */
+        public static final TagKey<Biome> HAS_MUSKOX = TagKey.create(
+                Registries.BIOME,
+                Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "has_muskox"));
+
         private Biomes() {}
     }
 

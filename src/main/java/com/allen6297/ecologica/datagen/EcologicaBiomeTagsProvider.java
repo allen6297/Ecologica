@@ -20,5 +20,6 @@ public class EcologicaBiomeTagsProvider extends BiomeTagsProvider {
         tag(EcologicaTags.Biomes.HAS_BOG_IRON).add(Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
         tag(EcologicaTags.Biomes.HAS_GREENSTONE).add(Biomes.SNOWY_PLAINS);
         tag(EcologicaTags.Biomes.HAS_SPROUTED_LICHEN).add(Biomes.SNOWY_PLAINS);
+        tag(EcologicaTags.Biomes.HAS_MUSKOX).add(Biomes.SNOWY_PLAINS);
     }
 }

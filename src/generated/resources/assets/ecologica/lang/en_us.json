@@ -6,7 +6,10 @@
   "block.ecologica.sheared_glow_lichen": "Sheared Glow Lichen",
   "block.ecologica.smooth_basalt_iron_ore": "Smooth Basalt Iron Ore",
   "block.ecologica.sprouted_glow_lichen": "Sprouted Glow Lichen",
+  "entity.ecologica.muskox": "Muskox",
+  "item.ecologica.muskox_spawn_egg": "Muskox Spawn Egg",
   "item.ecologica.phosphorus": "Phosphorus",
+  "item.ecologica.qiviut": "Qiviut",
   "item.ecologica.raw_bog_iron": "Raw Bog Iron",
   "itemGroup.ecologica": "Ecologica"
 }

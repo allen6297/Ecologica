@@ -42,7 +42,7 @@ authors="Kalob Allen"
 description='''
 Geology and ecology as one system. Rock and soil decide what can grow, and what grows decides which animals stay.
 Bog iron is a wetland concretion. Fen moss builds peat, and peat left covered slowly makes more iron. Peat left bare dries.
-Snowy plains invited into the tundra tags grow a deepslate column, greenstone belts of banded iron, and sprouted glow lichen that weathers rock.
+Snowy plains invited into the tundra tags grow a deepslate column, greenstone belts of banded iron, and sprouted glow lichen that weathers rock. Muskox herds graze the ordinary lichen and stand around their calves when a wolf comes close. A wolf that has killed one stops hunting for two days.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

@@ -12,7 +12,10 @@ What is in the game:
 - **Tundra ground** in snowy plains (the `ecologica:has_greenstone` tag). Soil and ordinary stone become deepslate up to the surface. Smooth basalt disks are the greenstone belts. Each belt has smooth basalt iron ore, one raw iron block, and a short vein of ore continuing down.
 - **Sprouted glow lichen**. Bone meal on glow lichen sprouts it. In sunlight it turns stone into gravel, gravel into sand, and sand into dirt, or it spreads ordinary glow lichen within eight blocks. Shears pause it. Mud is left alone. Smelting lichen gives phosphorus, which crafts into a glow ink sac.
 
-Muskox herds, predators, dwarf trees, and the shrubs that follow weathered rock are not implemented yet.
+- **Muskox** spawn in herds of three to five in snowy plains (`ecologica:has_muskox`). They eat ordinary glow lichen and leave the sprouted kind. Adults walk back toward the herd, and when a wolf comes near a calf they take places in a ring around it. Shearing a muskox that has eaten, and that is not packed in with four other muskox, drops qiviut. A crowded group gives nothing. The body drops leather, not meat.
+- **Wolves** can hunt muskox. After a wolf kills one, it stops taking animal targets for two Minecraft days.
+
+Dwarf trees, shrubs, moss that follows weathered rock, the long breeding period after a death, and polar bears are not implemented yet. The muskox model is a plain quadruped placeholder.
 
 ## Requirements
 
@@ -27,7 +30,7 @@ The Gradle wrapper is included. The first run downloads Minecraft, NeoForge, and
 ./gradlew build
 ```
 
-Produces `build/libs/ecologica-0.5.0.jar`.
+Produces `build/libs/ecologica-0.6.0.jar`.
 
 ```bash
 ./gradlew runData
@@ -55,7 +58,7 @@ Launches a dedicated server.
 ./gradlew runGameTestServer
 ```
 
-Runs the fen game tests and the tundra tests: the deepslate column, the greenstone belt, weathering, shears, shade, lichen spread, and bone meal.
+Runs the fen tests, the tundra tests, and the muskox tests: grazing, the calf ring, qiviut, and a wolf that has already eaten.
 
 Import the repository as a Gradle project in IntelliJ IDEA or Eclipse. If libraries look missing, run `./gradlew --refresh-dependencies`.
 

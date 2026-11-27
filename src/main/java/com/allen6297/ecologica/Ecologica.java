@@ -5,8 +5,10 @@ import org.slf4j.Logger;
 import com.allen6297.ecologica.datagen.EcologicaDataGenerators;
 import com.allen6297.ecologica.gametest.EcologicaGameTests;
 import com.allen6297.ecologica.block.SproutedGlowLichenBlock;
+import com.allen6297.ecologica.entity.PredatorSatiation;
 import com.allen6297.ecologica.registry.EcologicaBlocks;
 import com.allen6297.ecologica.registry.EcologicaCreativeTabs;
+import com.allen6297.ecologica.registry.EcologicaEntities;
 import com.allen6297.ecologica.registry.EcologicaFeatures;
 import com.allen6297.ecologica.registry.EcologicaItems;
 import com.mojang.logging.LogUtils;
@@ -30,10 +32,17 @@ public class Ecologica {
         modEventBus.addListener(EcologicaGameTests::register);
 
         EcologicaBlocks.BLOCKS.register(modEventBus);
+        EcologicaEntities.ENTITIES.register(modEventBus);
         EcologicaItems.ITEMS.register(modEventBus);
         EcologicaCreativeTabs.TABS.register(modEventBus);
         EcologicaFeatures.TYPES.register(modEventBus);
+        PredatorSatiation.ATTACHMENTS.register(modEventBus);
+        modEventBus.addListener(EcologicaEntities::attributes);
+        modEventBus.addListener(EcologicaEntities::spawnPlacements);
         NeoForge.EVENT_BUS.addListener(SproutedGlowLichenBlock::onBonemeal);
+        NeoForge.EVENT_BUS.addListener(PredatorSatiation::onWolfJoin);
+        NeoForge.EVENT_BUS.addListener(PredatorSatiation::onDeath);
+        NeoForge.EVENT_BUS.addListener(PredatorSatiation::onRetarget);
 
         LOGGER.info("Ecologica {} loading", modContainer.getModInfo().getVersion());
     }
