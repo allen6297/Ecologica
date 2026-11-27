@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,20 +45,20 @@ public class FenMossBlock extends CarpetBlock {
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(@NonNull BlockState state, LevelReader level, BlockPos pos) {
         return level.getBlockState(pos.below()).is(EcologicaTags.Blocks.FEN_MOSS_SUPPORTS);
     }
 
     @Override
     protected BlockState updateShape(
             BlockState state,
-            LevelReader level,
-            ScheduledTickAccess ticks,
-            BlockPos pos,
-            Direction direction,
-            BlockPos neighborPos,
-            BlockState neighbor,
-            RandomSource random) {
+            @NonNull LevelReader level,
+            @NonNull ScheduledTickAccess ticks,
+            @NonNull BlockPos pos,
+            @NonNull Direction direction,
+            @NonNull BlockPos neighborPos,
+            @NonNull BlockState neighbor,
+            @NonNull RandomSource random) {
         if (!state.canSurvive(level, pos)) {
             // Digging the sediment out from under a transplant should hand the moss back, not delete it.
             if (level instanceof Level concrete && !concrete.isClientSide()) {
@@ -69,7 +70,7 @@ public class FenMossBlock extends CarpetBlock {
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NonNull BlockState state, @NonNull ServerLevel level, @NonNull BlockPos pos, @NonNull RandomSource random) {
         if (!isInFen(level, pos)) {
             return;
         }

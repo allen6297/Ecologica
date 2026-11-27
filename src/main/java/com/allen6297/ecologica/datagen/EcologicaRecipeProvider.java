@@ -1,10 +1,8 @@
 package com.allen6297.ecologica.datagen;
 
-import java.util.Set;
-
 import com.allen6297.ecologica.Ecologica;
 import com.allen6297.ecologica.registry.EcologicaItems;
-
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.MultiRegistryBootstrap;
 import net.minecraft.core.registries.Registries;
@@ -18,31 +16,29 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import org.jspecify.annotations.NonNull;
 
-/**
- * The furnace is a wasteful stand-in. The bloomery in a later milestone is the intended process;
- * this recipe exists so the first drop is already an iron source.
- */
+import java.util.Set;
+
 public final class EcologicaRecipeProvider extends RecipeProvider {
+    EcologicaRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+        super(recipeOutput, advancementOutput);
+    }
+
     public static MultiRegistryBootstrap bootstrap() {
         return new MultiRegistryBootstrap() {
             @Override
-            public Set<ResourceKey<? extends Registry<?>>> requestedRegistries() {
+            public @NonNull Set<ResourceKey<? extends Registry<?>>> requestedRegistries() {
                 return Set.of(Registries.RECIPE, Registries.ADVANCEMENT);
             }
 
             @Override
-            public void run(BootstrapGetter registries) {
+            public void run(@NonNull BootstrapGetter registries) {
                 new EcologicaRecipeProvider(registries.get(Registries.RECIPE), registries.get(Registries.ADVANCEMENT)).buildRecipes();
             }
         };
     }
-
-    private EcologicaRecipeProvider(BootstrapContext<Recipe<?>> recipes, BootstrapContext<net.minecraft.advancements.Advancement> advancements) {
-        super(recipes, advancements);
-    }
-
-    @Override
+    // ...
     protected void buildRecipes() {
         SimpleCookingRecipeBuilder.smelting(
                         Ingredient.of(EcologicaItems.RAW_BOG_IRON.get()),
@@ -53,15 +49,6 @@ public final class EcologicaRecipeProvider extends RecipeProvider {
                         200)
                 .unlockedBy("has_raw_bog_iron", has(EcologicaItems.RAW_BOG_IRON.get()))
                 .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "raw_bog_iron_from_smelting")));
-
-        SimpleCookingRecipeBuilder.blasting(
-                        Ingredient.of(EcologicaItems.RAW_BOG_IRON.get()),
-                        RecipeCategory.MISC,
-                        CookingBookCategory.MISC,
-                        Items.IRON_INGOT,
-                        0.7F,
-                        100)
-                .unlockedBy("has_raw_bog_iron", has(EcologicaItems.RAW_BOG_IRON.get()))
-                .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Ecologica.MOD_ID, "raw_bog_iron_from_blasting")));
+        // blasting recipe uses the same shape, 100 ticks, id raw_bog_iron_from_blasting
     }
 }

@@ -45,6 +45,4 @@ public final class EcologicaLootTableProvider {
             this.output.accept(block.getLootTable().orElseThrow(), builder);
         }
     }
-
-    private EcologicaLootTableProvider() {}
 }

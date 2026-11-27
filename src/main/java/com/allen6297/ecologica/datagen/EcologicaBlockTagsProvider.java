@@ -1,11 +1,8 @@
 package com.allen6297.ecologica.datagen;
 
-import java.util.concurrent.CompletableFuture;
-
 import com.allen6297.ecologica.Ecologica;
 import com.allen6297.ecologica.registry.EcologicaBlocks;
 import com.allen6297.ecologica.tag.EcologicaTags;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -14,6 +11,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
+
+import java.util.concurrent.CompletableFuture;
 
 public class EcologicaBlockTagsProvider extends BlockTagsProvider {
     public EcologicaBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
